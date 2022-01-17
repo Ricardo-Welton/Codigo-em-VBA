@@ -1,0 +1,8 @@
+Do While ActiveCell <> Empty
+inicio:
+        If LCase(Left(ActiveCell, 3)) <> LCase("TED") And ActiveCell <> Empty Then
+                ActiveCell.EntireRow.Delete
+                GoTo inicio
+        End If
+        ActiveCell.Offset(1, 0).Activate
+    Loop

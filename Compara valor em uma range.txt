@@ -1,0 +1,27 @@
+Sub Find_CONTA()
+
+Sheets("MOVIMENTO COT").Activate
+Cells(4, 5).Activate
+
+    Dim FindString As String
+    Dim Rng As Range
+    FindString = ActiveCell.Text
+    If Trim(FindString) <> "" Then
+    
+        With Sheets("TABELAS_EQUIVALENCIA").Range("C:C")
+            Set Rng = .Find(What:=FindString, _
+                            After:=.Cells(.Cells.Count), _
+                            LookIn:=xlValues, _
+                            LookAt:=xlWhole, _
+                            SearchOrder:=xlByRows, _
+                            SearchDirection:=xlNext, _
+                            MatchCase:=False)
+            If Not Rng Is Nothing Then
+                retCNPJ = (Rng.Offset(0, 2))
+            Else
+                retCNPJ = ("NAO ENCONTRADO")
+                Planilha3.Range("A10000").End(xlUp).Offset(1, 0) = retCNPJ
+            End If
+        End With
+    End If
+End Sub
